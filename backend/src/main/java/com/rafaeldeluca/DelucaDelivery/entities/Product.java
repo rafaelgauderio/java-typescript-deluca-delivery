@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +28,11 @@ public class Product  implements Serializable {
 	private String description;
 	private String imageUri;
 	
+	@ManyToMany
+	@JoinTable(name = "tb_order_product",
+		joinColumns = @JoinColumn(name = "product_id"),
+		inverseJoinColumns = @JoinColumn(name = "order_id")				
+			)
 	private List<Order> orders = new ArrayList<Order> ();
 	
 	public Product () {
