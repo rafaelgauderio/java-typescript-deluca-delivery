@@ -6,10 +6,23 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="tb_order")
 public class Order implements Serializable {	
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String address;
 	private Double latitude;
@@ -19,6 +32,11 @@ public class Order implements Serializable {
 	
 	// coleção set não tem repetições do mesmo produto em um determinado pedido
 	// não colocar conjuntos nos contrutores
+	@ManyToMany
+	@JoinTable(name = "tb_order_product",
+		joinColumns = @JoinColumn(name = "order_id"),
+		inverseJoinColumns = @JoinColumn(name = "product_id")				
+			)
 	private Set<Product> produtcs = new HashSet<Product> (); 
 	
 	public Order () {
