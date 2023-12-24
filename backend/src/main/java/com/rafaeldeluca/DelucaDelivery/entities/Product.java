@@ -1,6 +1,8 @@
 package com.rafaeldeluca.DelucaDelivery.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Product  implements Serializable {	
@@ -12,6 +14,8 @@ public class Product  implements Serializable {
 	private Double price;
 	private String description;
 	private String imageUri;
+	
+	private List<Order> orders = new ArrayList<Order> ();
 	
 	public Product () {
 		
@@ -63,6 +67,11 @@ public class Product  implements Serializable {
 
 	public void setImageUri(String imageUri) {
 		this.imageUri = imageUri;
+	}	
+	
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
